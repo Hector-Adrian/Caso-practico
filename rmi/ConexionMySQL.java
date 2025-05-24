@@ -5,9 +5,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConexionMySQL {
-    private static final String JDBC_URL = "jdbc:mysql://switchback.proxy.rlwy.net:23308/railway?useSSL=false&serverTimezone=UTC";
+
+    private static final String JDBC_URL = "jdbc:mysql://ballast.proxy.rlwy.net:56064/railway?useSSL=false&serverTimezone=UTC";
     private static final String USER = "root";
-    private static final String PASSWORD = "mDOEwmcZLqchMcNYkyWdIBRIIFIioHIc";
+    private static final String PASSWORD = "TlikqVLAeFggxyYWULoXmNCFUngTkiNk";
 
     static {
         try {
@@ -18,6 +19,7 @@ public class ConexionMySQL {
             throw new RuntimeException("No se pudo cargar el driver JDBC", e);
         }
     }
+
 
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(JDBC_URL, USER, PASSWORD);
