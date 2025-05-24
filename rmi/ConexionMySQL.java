@@ -5,23 +5,30 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConexionMySQL {
-    public static void main(String[] args) {
-        String jdbcUrl = "jdbc:mysql://switchback.proxy.rlwy.net:23308/railway?useSSL=false&serverTimezone=UTC";
-        String user = "root";
-        String password = "mDOEwmcZLqchMcNYkyWdIBRIIFIioHIc";
+    private static final String JDBC_URL = "jdbc:mysql://switchback.proxy.rlwy.net:23308/railway?useSSL=false&serverTimezone=UTC";
+    private static final String USER = "root";
+    private static final String PASSWORD = "mDOEwmcZLqchMcNYkyWdIBRIIFIioHIc";
 
+    static {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection(jdbcUrl, user, password);
-            System.out.println("¡Conectado a la base de datos Railway!");
-            conn.close();
         } catch (ClassNotFoundException e) {
-            System.out.println("Error al cargar el driver JDBC");
+            System.err.println("Error al cargar el driver JDBC: " + e.getMessage());
             e.printStackTrace();
+            throw new RuntimeException("No se pudo cargar el driver JDBC", e);
+        }
+    }
+
+    public static Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(JDBC_URL, USER, PASSWORD);
+    }
+
+    public static void main(String[] args) {
+        try (Connection conn = getConnection()) {
+            System.out.println("¡Conectado a la base de datos Railway!");
         } catch (SQLException e) {
-            System.out.println("Error al conectar a la base de datos");
+            System.err.println("Error al conectar a la base de datos: " + e.getMessage());
             e.printStackTrace();
         }
     }
 }
-
