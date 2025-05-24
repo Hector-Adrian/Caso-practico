@@ -17,8 +17,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Cliente extends JFrame {
 
@@ -306,7 +304,7 @@ public class Cliente extends JFrame {
         tabbedPane.addTab("Citas", citaPanel);
 
         // Listeners
-        btnCitaCrear.addActionListener(e -> crearCita());
+        btnCitaCrear.addActionListener(e -> crearCitaRmi());
         btnCitaActualizar.addActionListener(e -> actualizarCita());
         btnCitaEliminar.addActionListener(e -> eliminarCita());
         btnCitaBuscarMedicosFecha.addActionListener(e -> buscarMedicosPorEspecialidadParaCita());
@@ -323,7 +321,7 @@ public class Cliente extends JFrame {
 
     // --- Métodos para Pacientes ---
 
-    private void crearPaciente() {
+    public void crearPaciente() {
         if (!validarCamposPaciente(false)) {
             return;
         }
@@ -648,7 +646,7 @@ public class Cliente extends JFrame {
 
     // --- Métodos para Citas ---
 
-    private void crearCita() {
+    private void crearCitaRmi() {
         if (!validarCamposCita(false)) {
             return;
         }
